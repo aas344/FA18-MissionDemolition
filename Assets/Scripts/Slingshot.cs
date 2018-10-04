@@ -3,11 +3,11 @@ using System.Collections;
  
 public class Slingshot : MonoBehaviour {
 // fields set in the Unity Inspector pane 
-[Header(" Set in Inspector")] // a 
+[Header("Set in Inspector")] // a 
 public GameObject prefabProjectile;
-public float velocityMult = 8f; // a 
+public float velocityMult = 8f; // a     
 // fields set dynamically 
-[Header(" Set Dynamically")] // a 
+[Header("Set Dynamically")] // a 
 public GameObject launchPoint; 
 public Vector3 launchPos; // b 
 public GameObject projectile; // b 
@@ -22,11 +22,11 @@ launchPos = launchPointTrans.position; // c
 }
 
 void OnMouseEnter() { 
-//print(" Slingshot:OnMouseEnter()");
+// print("Slingshot:OnMouseEnter()");
 launchPoint.SetActive( true ); //b
  } 
 void OnMouseExit() { 
-//print(" Slingshot:OnMouseExit()");
+// print("Slingshot:OnMouseExit()");
 launchPoint.SetActive( false ); //b 
  }
 void OnMouseDown() { // d 
@@ -35,12 +35,10 @@ aimingMode = true;
 // Instantiate a Projectile 
 projectile = Instantiate( prefabProjectile ) as GameObject; 
 // Start it at the launchPoint 
-projectile.transform.position = launchPos; 
-// Set it to isKinematic for now 
-projectile.GetComponent < Rigidbody >(). isKinematic = true;
+projectile.transform.position = launchPos;
 // Set it to isKinematic for now 
 projectileRigidbody = projectile.GetComponent<Rigidbody>(); // a 
-projectileRigidbody.isKinematic = true; // a  
+projectileRigidbody.isKinematic = true;
 } 
 
 void Update() { 
@@ -62,11 +60,11 @@ mouseDelta *= maxMagnitude;
 // Move the projectile to this new position 
 Vector3 projPos = launchPos + mouseDelta; 
 projectile.transform.position = projPos; 
-if ( Input.GetMouseButtonUp( 0) ) { // e 
+if ( Input.GetMouseButtonUp(0) ) { // e 
 // The mouse has been released 
-aimingMode = false; 
+aimingMode = false;
 projectileRigidbody.isKinematic = false; 
-projectileRigidbody.velocity = -mouseDelta * velocityMult; 
+projectileRigidbody.velocity = -mouseDelta * velocityMult;
 projectile = null; 
 } 
 } 
